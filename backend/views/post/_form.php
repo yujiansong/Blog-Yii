@@ -18,8 +18,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
+    <?php
+        /*
+        //第一种方法
+        $psObjs = \common\models\Poststatus::find()->all();
+        $allStatus = \yii\helpers\ArrayHelper::map($psObjs, 'id', 'name');
+        */
+        $psArray = Yii::$app->db->createCommand('select id, name from poststatus')->queryAll();
+        $allStatus = \yii\helpers\ArrayHelper::map($psArray, 'id', 'name');
+    ?>
+    <?= $form->field($model, 'status')->dropDownList($allStatus, ['prompt' => '请选择状态']); ?>
     <?= $form->field($model, 'create_time')->textInput() ?>
 
     <?= $form->field($model, 'update_time')->textInput() ?>
@@ -27,7 +35,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'author_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新增' : '修改', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
