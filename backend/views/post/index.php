@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('创建文章', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php //$searchModel = new \common\models\Tag(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,7 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
 //            'author_id',
             [
-                'attribute' => 'author_id',
+                'attribute' => 'authorName',
+                'label' => '作者',
                 'value' => 'author.nickname',
             ],
 //            'content:ntext',
