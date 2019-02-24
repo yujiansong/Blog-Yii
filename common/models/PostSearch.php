@@ -47,8 +47,16 @@ class PostSearch extends Post
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 5],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ],
+                'attributes' => ['id', 'title'],
+            ]
         ]);
 
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -69,7 +77,7 @@ class PostSearch extends Post
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'tags', $this->tags]);
-
+        */
         return $dataProvider;
     }
 }
