@@ -114,4 +114,10 @@ class Comment extends \yii\db\ActiveRecord
             return true;
         } else return false;
     }
+
+    public static function getStatus()
+    {
+        return Commentstatus::find()->select(['name', 'id'])->orderBy('position')
+            ->indexBy('id')->column();
+    }
 }
