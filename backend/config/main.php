@@ -15,9 +15,17 @@ return [
     'language' => 'zh-CN',
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Adminuser',
             'enableAutoLogin' => true,
         ],
+        'session' => [
+            'name' => 'PHPBACKSESSION',
+            'savePath' => sys_get_temp_dir(),
+        ],
+        'request' => [
+            'cookieValidationKey' => 'dfshdfjfsdf879374893jkjfaddcbaa',
+            'csrfParam' => '_adminCSRF',
+        ]
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
